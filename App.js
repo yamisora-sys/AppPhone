@@ -1,20 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-
-export default function App() {
+import React, { useState, useEffect } from 'react';
+import { View, Text, TouchableOpacity, Alert, StyleSheet } from 'react-native';
+import UDP from 'react-native-udp';
+const App = () => {
+  const sendMsg = async () => {
+    try{
+      const client = UDP.createSocket('udp4');
+      const msg = 'Hello World';
+    }
+    catch(err){
+      console.log(err);
+    }
+  }
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <TouchableOpacity onPress={() => sendMsg()}>
+        <Text>Send Message</Text>
+      </TouchableOpacity>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    marginTop: 50,
+  }
 });
+
+export default App;
